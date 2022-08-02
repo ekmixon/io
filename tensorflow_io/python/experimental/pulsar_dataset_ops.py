@@ -63,10 +63,9 @@ class PulsarIODataset(tf.data.Dataset):
 
             if poll_timeout > timeout:
                 raise ValueError(
-                    "Invalid poll_timeout value: {}, must be <= timeout({})".format(
-                        poll_timeout, timeout
-                    )
+                    f"Invalid poll_timeout value: {poll_timeout}, must be <= timeout({timeout})"
                 )
+
 
             resource = core_ops.io_pulsar_readable_init(
                 service_url, topic, subscription, ack_grouping_time

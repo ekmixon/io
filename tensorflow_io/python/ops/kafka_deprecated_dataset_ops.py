@@ -87,11 +87,11 @@ class KafkaDataset(data.Dataset):
         self._timeout = tf.convert_to_tensor(
             timeout, dtype=dtypes.int64, name="timeout"
         )
-        config_global = config_global if config_global else []
+        config_global = config_global or []
         self._config_global = tf.convert_to_tensor(
             config_global, dtype=dtypes.string, name="config_global"
         )
-        config_topic = config_topic if config_topic else []
+        config_topic = config_topic or []
         self._config_topic = tf.convert_to_tensor(
             config_topic, dtype=dtypes.string, name="config_topic"
         )
@@ -167,7 +167,7 @@ class KafkaOutputSequence:
         self._topic = topic
         metadata = list(configuration or [])
         if servers is not None:
-            metadata.append("bootstrap.servers=%s" % servers)
+            metadata.append(f"bootstrap.servers={servers}")
         self._resource = core_ops.io_kafka_output_sequence(
             topic=topic, metadata=metadata
         )

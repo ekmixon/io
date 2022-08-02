@@ -1014,25 +1014,26 @@ class ParseAvroDatasetTest(AvroDatasetTestBase):
           """
         record_data = [
             {"multi_type": None},
-            {"multi_type": True},  # written as double(1.0)
-            {"multi_type": int(1)},  # written as double(1.0)
-            {"multi_type": 2},  # written as double(2.0)
-            {"multi_type": float(3.0)},  # written as double(3.0)
-            {"multi_type": 4.0},  # written as double (4.0)
+            {"multi_type": True},
+            {"multi_type": 1},
+            {"multi_type": 2},
+            {"multi_type": 3.0},
+            {"multi_type": 4.0},
             {"multi_type": "abc"},
         ]
+
         features = {
             "multi_type:boolean": tf.io.FixedLenFeature(
                 [], tf.dtypes.bool, default_value=False
             ),
             "multi_type:int": tf.io.FixedLenFeature(
-                [], tf.dtypes.int32, default_value=int(0)
+                [], tf.dtypes.int32, default_value=0
             ),
             "multi_type:long": tf.io.FixedLenFeature(
                 [], tf.dtypes.int64, default_value=0
             ),
             "multi_type:float": tf.io.FixedLenFeature(
-                [], tf.dtypes.float32, default_value=float(0.0)
+                [], tf.dtypes.float32, default_value=0.0
             ),
             "multi_type:double": tf.io.FixedLenFeature(
                 [], tf.dtypes.float64, default_value=0.0
@@ -1041,6 +1042,7 @@ class ParseAvroDatasetTest(AvroDatasetTestBase):
                 [], tf.dtypes.string, default_value=""
             ),
         }
+
         expected_data = [
             {
                 "multi_type:boolean": tf.convert_to_tensor(

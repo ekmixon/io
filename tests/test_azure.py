@@ -52,8 +52,9 @@ class AZFSTestBase:
         az://<account>.blob.core.windows.net/<container>/<path>
         """
         file_name = "az://" + os.path.join(
-            self.account + ".blob.core.windows.net", self.container
+            f"{self.account}.blob.core.windows.net", self.container
         )
+
         if not tf.io.gfile.isdir(file_name):
             tf.io.gfile.makedirs(file_name)
 
@@ -209,7 +210,7 @@ class AZFSTest(tf.test.TestCase, AZFSTestBase):
 
         self.account = "devstoreaccount1"
         self.container = "aztest"
-        self.path_root = "az://" + os.path.join(self.account, self.container)
+        self.path_root = f"az://{os.path.join(self.account, self.container)}"
         super().__init__(methodName)
 
     def setUp(self):
@@ -224,7 +225,7 @@ class AZFSSASTest(tf.test.TestCase, AZFSTestBase):
     def __init__(self, methodName="runTest"):  # pylint: disable=invalid-name
         self.account = "devstoreaccount1"
         self.container = "aztest"
-        self.path_root = "az://" + os.path.join(self.account, self.container)
+        self.path_root = f"az://{os.path.join(self.account, self.container)}"
         super().__init__(methodName)
 
     def setUp(self):
